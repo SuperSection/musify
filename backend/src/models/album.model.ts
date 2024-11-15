@@ -37,7 +37,6 @@ const AlbumSchema = new Schema<IAlbumDocument>(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Song",
-        required: false,
       },
     ],
   },
