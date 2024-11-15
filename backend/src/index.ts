@@ -1,12 +1,16 @@
 import express, { Application, json, Request } from "express";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
+import fileUpload from "express-fileupload";
+import path from "path";
 
 import { connectDB } from "./lib/db";
 import { errorHandler } from "./handler/error.handler";
 
 const app: Application = express();
+
 const PORT = process.env.PORT;
+const __dirname = path.resolve();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -22,6 +26,16 @@ app.use(
 // Security middleware
 app.use(cors());
 app.use(clerkMiddleware()); // this will add auth info to the request object
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: path.join(__dirname, "tmp"),
+    createParentPath: true,
+    limits: {
+      fileSize: 10 * 1024 * 1024, // 10MB
+    },
+  })
+);
 
 // Routes
 import authRoutes from "./routes/auth.route";
