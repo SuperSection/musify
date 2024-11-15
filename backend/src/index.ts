@@ -12,7 +12,8 @@ const PORT = process.env.PORT;
 app.use(express.urlencoded({ extended: true }));
 app.use(
   json({
-    verify: (req: Request & { rawBody?: Buffer }, res, buf) => {
+    // to parse the body of the request
+    verify: (req: Request, res, buf) => {
       req.rawBody = buf;
     },
   })
