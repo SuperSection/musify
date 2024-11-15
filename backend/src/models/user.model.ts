@@ -4,7 +4,7 @@ import mongoose, { Model, Schema, Document } from "mongoose";
 interface IUser {
   fullName: string;
   imageUrl: string;
-  email: string;
+  clerkId: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -21,18 +21,17 @@ const UserSchema = new Schema<IUserDocument>(
     imageUrl: {
       type: String,
       required: true,
-      unique: true,
     },
-    email: {
+    clerkId: {
       type: String,
       required: true,
       unique: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true } // createdAt, updatedAt
 );
 
-// Define the model
+// Define the User model
 const UserModel: Model<IUserDocument> = mongoose.model<IUserDocument>(
   "User",
   UserSchema
