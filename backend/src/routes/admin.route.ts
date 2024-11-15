@@ -1,9 +1,8 @@
 import { Router } from "express";
+import { requireAdmin } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("Admin route with GET method");
-});
+router.get("/", requireAdmin);
 
 export default router;

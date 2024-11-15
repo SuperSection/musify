@@ -1,8 +1,9 @@
 import { Request as ExpressRequest } from "express";
+import { AuthObject } from "@clerk/backend";
 
 declare module "express" {
   export interface Request extends ExpressRequest {
-    user?: { id: string };
+    auth?: AuthObject;
     rawBody?: Buffer;
   }
 }

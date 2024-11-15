@@ -21,7 +21,7 @@ app.use(
 
 // Security middleware
 app.use(cors());
-app.use(clerkMiddleware());
+app.use(clerkMiddleware()); // this will add auth info to the request object
 
 // Routes
 import authRoutes from "./routes/auth.route";
