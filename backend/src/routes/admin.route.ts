@@ -1,6 +1,12 @@
 import { Router } from "express";
+import {
+  createAlbum,
+  createSong,
+  deleteSong,
+  deleteAlbum,
+  checkAdmin,
+} from "../controllers/admin.controller";
 import { requireAdmin } from "../middlewares/auth.middleware";
-import { createAlbum, createSong, deleteSong, deleteAlbum, checkAdmin } from "../controllers/admin.controller";
 
 const router = Router();
 

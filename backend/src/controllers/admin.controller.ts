@@ -105,7 +105,7 @@ const deleteAlbum = async (req: Request, res: Response, next: NextFunction) => {
     await Song.deleteMany({ albumId: id });
     await Album.findByIdAndDelete(id);
 
-    res.status(200).json({ message: "Album deleted successfully"});
+    res.status(200).json({ message: "Album deleted successfully" });
   } catch (error) {
     console.log("ERROR: in deleteAlbum controller", error);
     next(error);

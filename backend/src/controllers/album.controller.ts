@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import Album from "../models/album.model";
 
-const getAllAlbums = async (req: Request, res: Response, next: NextFunction) => {
+const getAllAlbums = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const albums = await Album.find();
     res.status(200).json(albums);
@@ -11,7 +15,11 @@ const getAllAlbums = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
-const getAlbumById = async (req: Request, res: Response, next: NextFunction) => {
+const getAlbumById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { albumId } = req.params;
     const album = await Album.findById(albumId).populate("songs");
