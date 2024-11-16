@@ -26,6 +26,8 @@ app.use(
 // Security middleware
 app.use(cors());
 app.use(clerkMiddleware()); // this will add auth info to the request object
+
+// File upload middleware
 app.use(
   fileUpload({
     useTempFiles: true,
