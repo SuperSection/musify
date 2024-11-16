@@ -48,4 +48,68 @@ const createSong = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createSong };
+const deleteSong = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const song = await Song.findById(id);
+
+    // if song belongs to an album, remove it from the album's songs array
+    if (song?.albumId) {
+      await Album.findByIdAndUpdate(song.albumId, {
+        $pull: { songs: id },
+      });
+    }
+
+    await Song.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message: "Song deleted successfully",
+    });
+  } catch (error) {
+    console.log("ERROR: in deleteSong controller", error);
+    next(error);
+  }
+};
+
+const createAlbum = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    if (!req.files || !req.files.imageFile) {
+      res.status(400).json({
+        message: "Image file is required",
+      });
+      return;
+    }
+
+    const { title, artist, releaseYear } = req.body;
+
+    const imageFile = req.files.imageFile as UploadedFile;
+    const imageUrl = await uploadToCloudinary(imageFile);
+
+    const album = await Album.create({
+      title,
+      artist,
+      releaseYear,
+      imageUrl,
+    });
+
+    res.status(201).json({ message: "Album created successfully", album });
+  } catch (error) {
+    console.log("ERROR: in createAlbum controller", error);
+    next(error);
+  }
+};
+
+const deleteAlbum = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    await Song.deleteMany({ albumId: id });
+    await Album.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Album deleted successfully"});
+  } catch (error) {
+    console.log("ERROR: in deleteAlbum controller", error);
+    next(error);
+  }
+};
+
+export { createSong, deleteSong, createAlbum, deleteAlbum };
