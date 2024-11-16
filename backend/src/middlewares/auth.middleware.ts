@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { clerkClient } from "@clerk/express";
 
-export const protectRoute = async (req: Request, res: Response, next: NextFunction) => {
+export const protectRoute = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (!req.auth?.userId) {
     res.status(401).json({ message: "Unauthorized - you must be logged in" });
     return;
@@ -10,7 +14,11 @@ export const protectRoute = async (req: Request, res: Response, next: NextFuncti
   next();
 };
 
-export const requireAdmin = async(req: Request, res: Response, next: NextFunction) => {
+export const requireAdmin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const userId = req.auth?.userId;
     if (!userId) {
@@ -19,7 +27,8 @@ export const requireAdmin = async(req: Request, res: Response, next: NextFunctio
     }
 
     const currentUser = await clerkClient.users.getUser(userId);
-    const isAdmin = currentUser.primaryEmailAddress?.emailAddress === process.env.ADMIN_EMAIL;
+    const isAdmin =
+      currentUser.primaryEmailAddress?.emailAddress === process.env.ADMIN_EMAIL;
     if (!isAdmin) {
       res.status(403).json({ message: "Unauthorized - you must be an admin" });
       return;
@@ -27,7 +36,10 @@ export const requireAdmin = async(req: Request, res: Response, next: NextFunctio
 
     next();
   } catch (error) {
-    res.status(500).json({ message: "Internal server error in requireAdmin middleware", error });
+    res.status(500).json({
+      message: "Internal server error in requireAdmin middleware",
+      error,
+    });
     next(error);
   }
 };
