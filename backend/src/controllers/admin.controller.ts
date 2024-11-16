@@ -112,4 +112,9 @@ const deleteAlbum = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createSong, deleteSong, createAlbum, deleteAlbum };
+const checkAdmin = async (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).json({ admin: true });
+  next();
+};
+
+export { createSong, deleteSong, createAlbum, deleteAlbum, checkAdmin };
