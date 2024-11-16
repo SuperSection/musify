@@ -4,6 +4,6 @@ import { createSong } from "../controllers/admin.controller";
 
 const router = Router();
 
-router.get("/", requireAdmin, createSong);
+router.post("/songs", requireAdmin, createSong);
 
 export default router;
