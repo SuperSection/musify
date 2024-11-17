@@ -4,7 +4,6 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
-
 import { Button } from "@/components/ui/button";
 
 function App() {
