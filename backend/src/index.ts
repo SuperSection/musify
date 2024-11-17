@@ -1,8 +1,8 @@
 import express, { Application, json, Request } from "express";
-import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import fileUpload from "express-fileupload";
 import path from "path";
+import cors from "cors";
 
 import { connectDB } from "./lib/db";
 import { errorHandler } from "./handler/error.handler";
@@ -63,3 +63,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   connectDB();
 });
+
+// TODO: implement socket.io
