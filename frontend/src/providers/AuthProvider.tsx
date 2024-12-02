@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
-import { axiosInstance } from "@/lib/axios";
 import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+
+import { axiosInstance } from "@/lib/axios";
 
 const updateAuthHeader = async (token: string | null) => {
   if (token)

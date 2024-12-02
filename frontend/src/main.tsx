@@ -1,6 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ClerkProvider } from "@clerk/clerk-react";
+import {
+  AuthenticateWithRedirectCallback,
+  ClerkProvider,
+} from "@clerk/clerk-react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -24,6 +27,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<HomePage />} />
+      <Route
+        path="/sso-callback"
+        element={
+          <AuthenticateWithRedirectCallback signUpForceRedirectUrl="/auth-callback" />
+        }
+      />
       <Route path="/auth-callback" element={<AuthCallbackPage />} />
     </>
   ),

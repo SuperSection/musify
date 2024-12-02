@@ -3,6 +3,7 @@ import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+// eslint-disable-next-line import/no-unresolved
 import tseslint from "typescript-eslint";
 import _import from "eslint-plugin-import";
 import prettier from "eslint-plugin-prettier";
@@ -65,10 +66,11 @@ export default tseslint.config(
         "error",
         {
           groups: [
-            ["builtin", "external", "internal"],
-            ["parent", "sibling", "index"],
+            ["builtin", "external"],
+            ["internal", "parent", "sibling", "index"],
           ],
-          "newlines-between": "always",
+          pathGroupsExcludedImportTypes: ["builtin"],
+          "newlines-between": "always", // Ensure newlines between groups
         },
       ],
 

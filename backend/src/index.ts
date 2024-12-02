@@ -24,7 +24,12 @@ app.use(
 );
 
 // Security middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(clerkMiddleware()); // this will add auth info to the request object
 
 // File upload middleware
