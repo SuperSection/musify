@@ -8,7 +8,9 @@
     "build": "tsc",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "lint": "eslint 'src/**/*.ts'",
-    "lint:fix": "eslint 'src/**/*.ts' --fix"
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "seed:songs": "node --import=tsx --env-file=.env src/seeds/songs.seed.ts",
+    "seed:albums": "node --import=tsx --env-file=.env src/seeds/albums.seed.ts"
   },
   "keywords": [
     "Musify"

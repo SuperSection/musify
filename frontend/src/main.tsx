@@ -15,6 +15,8 @@ import "./index.css";
 import HomePage from "./pages/home/HomePage.tsx";
 import AuthCallbackPage from "./pages/auth-callback/AuthCallbackPage.tsx";
 import AuthProvider from "./providers/AuthProvider.tsx";
+import MainLayout from "./layout/MainLayout.tsx";
+import ChatPage from "./pages/chat/ChatPage.tsx";
 
 // Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -26,7 +28,6 @@ if (!PUBLISHABLE_KEY) {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<HomePage />} />
       <Route
         path="/sso-callback"
         element={
@@ -34,6 +35,11 @@ const router = createBrowserRouter(
         }
       />
       <Route path="/auth-callback" element={<AuthCallbackPage />} />
+
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/chat" element={<ChatPage />} />
+      </Route>
     </>
   ),
   {
