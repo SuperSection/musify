@@ -2,7 +2,7 @@ import Topbar from "@/components/Topbar";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="text-white">
       <Topbar />
     </div>
   );
